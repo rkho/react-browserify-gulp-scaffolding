@@ -10,9 +10,8 @@ var source = require('vinyl-source-stream');
 gulp.task('styles', function() {
 
   gulp.src(['./client/css/**.css'])
-    .pipe(concat('styles.css'))
-    .pipe(gulp.dest('./build'))
-    .pipe(livereload());
+    .pipe(concat('style.css'))
+    .pipe(gulp.dest('./build/'))
 
 });
 
@@ -25,27 +24,23 @@ gulp.task('browserify', function() {
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('./build/'))
-    .pipe(livereload());
 
 });
 
 gulp.task('images', function() {
 
-  gulp.src(['./client/img/**/*.png', './client/img/**/*.jpg'])
+  gulp.src(['./client/img/**/*.png'])
     .pipe(imagemin())
     .pipe(gulp.dest('./build/img/'))
-    .pipe(livereload());
 
 })
 
 gulp.task('dev', function() {
   gulp.run('build');
 
-  livereload.listen();
-
   gulp.watch('./client/js/**/*.js', ['browserify']);
   gulp.watch('./client/css/**/*.css', ['styles']);
-  gulp.watch('./client/img/**/*', ['images']);
+  gulp.watch('./client/img/*.png', ['images']);
 })
 
 gulp.task('build', ['styles', 'browserify', 'images']);
