@@ -9,7 +9,7 @@ var source = require('vinyl-source-stream');
 
 gulp.task('styles', function() {
 
-  gulp.src(['./client/css/**.css'])
+  gulp.src(['./client/css/*.css'])
     .pipe(concat('style.css'))
     .pipe(gulp.dest('./build/'))
 
@@ -40,7 +40,7 @@ gulp.task('dev', function() {
 
   gulp.watch('./client/js/**/*.js', ['browserify']);
   gulp.watch('./client/css/**/*.css', ['styles']);
-  gulp.watch('./client/img/*.png', ['images']);
+  gulp.watch('./client/img/*.3png', ['images']);
 })
 
 gulp.task('build', ['styles', 'browserify', 'images']);
